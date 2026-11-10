@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1060" font-family="Arial" font-size="15" fill="#1f2840"><rect width="1000" height="1060" fill="white"/>
+<defs><marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7a5"/></marker></defs>
+<rect x="250" y="50" width="500" height="964" rx="14" fill="#fffbea" stroke="#c9a227" stroke-width="2"/>
+<text x="500" y="38" text-anchor="middle" font-size="20" font-weight="700">BountyHub — Use Case Diagram</text>
+<line x1="118" y1="314" x2="295" y2="110" stroke="#555" stroke-width="1.5"/>
+<line x1="118" y1="314" x2="295" y2="194" stroke="#555" stroke-width="1.5"/>
+<line x1="118" y1="314" x2="295" y2="278" stroke="#555" stroke-width="1.5"/>
+<line x1="118" y1="314" x2="295" y2="362" stroke="#555" stroke-width="1.5"/>
+<line x1="882" y1="544" x2="705" y2="362" stroke="#555" stroke-width="1.5"/>
+<line x1="118" y1="314" x2="295" y2="446" stroke="#555" stroke-width="1.5"/>
+<line x1="882" y1="544" x2="705" y2="446" stroke="#555" stroke-width="1.5"/>
+<line x1="118" y1="314" x2="295" y2="530" stroke="#555" stroke-width="1.5"/>
+<line x1="882" y1="544" x2="705" y2="530" stroke="#555" stroke-width="1.5"/>
+<line x1="882" y1="544" x2="705" y2="614" stroke="#555" stroke-width="1.5"/>
+<line x1="882" y1="544" x2="705" y2="698" stroke="#555" stroke-width="1.5"/>
+<line x1="882" y1="544" x2="705" y2="782" stroke="#555" stroke-width="1.5"/>
+<line x1="882" y1="944" x2="705" y2="866" stroke="#555" stroke-width="1.5" stroke-dasharray="6 4"/>
+<line x1="882" y1="944" x2="705" y2="950" stroke="#555" stroke-width="1.5" stroke-dasharray="6 4"/>
+<ellipse cx="500" cy="110" rx="205" ry="30" fill="#ffe7b3" stroke="#1f2840" stroke-width="1.5"/><text x="500" y="115" text-anchor="middle">Post bounty with reward (escrow)</text>
+<ellipse cx="500" cy="194" rx="205" ry="30" fill="#ffe7b3" stroke="#1f2840" stroke-width="1.5"/><text x="500" y="199" text-anchor="middle">Cancel open bounty (refund)</text>
+<ellipse cx="500" cy="278" rx="205" ry="30" fill="#ffe7b3" stroke="#1f2840" stroke-width="1.5"/><text x="500" y="283" text-anchor="middle">Mark bounty complete (pay mentor)</text>
+<ellipse cx="500" cy="362" rx="205" ry="30" fill="#e3ecff" stroke="#1f2840" stroke-width="1.5"/><text x="500" y="367" text-anchor="middle">Register / Log in</text>
+<ellipse cx="500" cy="446" rx="205" ry="30" fill="#e3ecff" stroke="#1f2840" stroke-width="1.5"/><text x="500" y="451" text-anchor="middle">Join time-locked workspace</text>
+<ellipse cx="500" cy="530" rx="205" ry="30" fill="#e3ecff" stroke="#1f2840" stroke-width="1.5"/><text x="500" y="535" text-anchor="middle">Chat &amp; edit shared notes</text>
+<ellipse cx="500" cy="614" rx="205" ry="30" fill="#d9f5e8" stroke="#1f2840" stroke-width="1.5"/><text x="500" y="619" text-anchor="middle">Receive live bounty push (WebSocket)</text>
+<ellipse cx="500" cy="698" rx="205" ry="30" fill="#d9f5e8" stroke="#1f2840" stroke-width="1.5"/><text x="500" y="703" text-anchor="middle">Browse open bounty feed</text>
+<ellipse cx="500" cy="782" rx="205" ry="30" fill="#d9f5e8" stroke="#1f2840" stroke-width="1.5"/><text x="500" y="787" text-anchor="middle">Accept bounty (first mentor wins)</text>
+<ellipse cx="500" cy="866" rx="205" ry="30" fill="#eeeeee" stroke="#1f2840" stroke-width="1.5"/><text x="500" y="871" text-anchor="middle">Expire stale bounties &amp; refund</text>
+<ellipse cx="500" cy="950" rx="205" ry="30" fill="#eeeeee" stroke="#1f2840" stroke-width="1.5"/><text x="500" y="955" text-anchor="middle">Lock room when time is up</text>
+<path d="M705,782 C760,782 760,446 705,446" fill="none" stroke="#7a5" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arr)"/><text x="762" y="618.0" font-size="12" fill="#5a3">«include»</text>
+<g stroke="#1f2840" stroke-width="2.5" fill="none"><circle cx="90" cy="282" r="16"/><line x1="90" y1="298" x2="90" y2="340"/><line x1="66" y1="314" x2="114" y2="314"/><line x1="90" y1="340" x2="72" y2="372"/><line x1="90" y1="340" x2="108" y2="372"/></g><text x="90" y="398" text-anchor="middle" font-weight="700" font-size="18">Student</text><g stroke="#1f2840" stroke-width="2.5" fill="none"><circle cx="910" cy="512" r="16"/><line x1="910" y1="528" x2="910" y2="570"/><line x1="886" y1="544" x2="934" y2="544"/><line x1="910" y1="570" x2="892" y2="602"/><line x1="910" y1="570" x2="928" y2="602"/></g><text x="910" y="628" text-anchor="middle" font-weight="700" font-size="18">Mentor</text><g stroke="#1f2840" stroke-width="2.5" fill="none"><circle cx="910" cy="912" r="16"/><line x1="910" y1="928" x2="910" y2="970"/><line x1="886" y1="944" x2="934" y2="944"/><line x1="910" y1="970" x2="892" y2="1002"/><line x1="910" y1="970" x2="928" y2="1002"/></g><text x="910" y="1028" text-anchor="middle" font-weight="700" font-size="18">System timer</text>
+<g font-size="13"><rect x="30" y="900" width="14" height="14" fill="#ffe7b3" stroke="#1f2840"/><text x="52" y="912">Student only</text><rect x="30" y="924" width="14" height="14" fill="#e3ecff" stroke="#1f2840"/><text x="52" y="936">Student &amp; Mentor</text><rect x="30" y="948" width="14" height="14" fill="#d9f5e8" stroke="#1f2840"/><text x="52" y="960">Mentor only</text><rect x="30" y="972" width="14" height="14" fill="#eeeeee" stroke="#1f2840"/><text x="52" y="984">Scheduled (system)</text></g>
+</svg>

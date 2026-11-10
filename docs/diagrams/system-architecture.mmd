@@ -1,0 +1,29 @@
+flowchart LR
+  subgraph Browser["Browser (React SPA, Vite)"]
+    UI["Pages: Auth / Dashboard / Room"]
+    CTX["AppContext<br/>(JWT, API client, socket, toasts)"]
+    UI --> CTX
+  end
+
+  subgraph Node["Node.js process (Express 5 + Socket.IO)"]
+    REST["REST router /api/*<br/>+ JWT middleware"]
+    WS["Socket.IO gateway<br/>(JWT handshake)"]
+    SVC["Service layer<br/>Auth · Bounty · Room"]
+    NOTI["Notifier port<br/>(SocketNotifier)"]
+    SWEEP["Expiry sweeper<br/>(setInterval)"]
+    REPO["Repository port"]
+    REST --> SVC
+    WS --> SVC
+    SWEEP --> SVC
+    SVC --> REPO
+    SVC --> NOTI
+    NOTI --> WS
+  end
+
+  subgraph Data["Docker"]
+    MDB[("MongoDB 7<br/>users · bounties · rooms")]
+  end
+
+  CTX -- "HTTPS JSON (Bearer JWT)" --> REST
+  CTX <-- "WebSocket events" --> WS
+  REPO -- "Mongoose (atomic findOneAndUpdate)" --> MDB

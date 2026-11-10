@@ -1,0 +1,15 @@
+flowchart TB
+  S((Student)) --> FE
+  M((Mentor)) --> FE
+  FE["React client"] -->|REST| API["API Gateway (Express)"]
+  FE <-->|WebSocket| RT["Realtime Gateway (Socket.IO)"]
+  API --> AUTH["Auth module<br/>register · login · JWT"]
+  API --> BNT["Bounty module<br/>post · accept · complete · cancel · expire"]
+  API --> ROOM["Workspace module<br/>time-lock · chat · notes"]
+  RT --> ROOM
+  BNT --> WAL["Token ledger<br/>(escrow / payout / refund)"]
+  BNT --> MATCH["Skill matcher<br/>(eligibility)"]
+  BNT --> NOTIFY["Notification fan-out"]
+  ROOM --> NOTIFY
+  NOTIFY --> RT
+  AUTH & BNT & ROOM & WAL --> DB[("MongoDB")]

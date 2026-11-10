@@ -1,0 +1,9 @@
+stateDiagram-v2
+  [*] --> open: student posts\n(reward escrowed)
+  open --> accepted: first eligible mentor accepts\n(room created, time-lock starts)
+  open --> cancelled: student cancels\n(refund)
+  open --> expired: accept window passes\n(sweeper refunds)
+  accepted --> completed: student marks complete\n(mentor paid, room closed)
+  completed --> [*]
+  cancelled --> [*]
+  expired --> [*]

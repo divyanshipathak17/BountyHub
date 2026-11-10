@@ -1,0 +1,27 @@
+sequenceDiagram
+  autonumber
+  actor S as Student
+  participant C as React client
+  participant A as Express /api
+  participant B as BountyService
+  participant U as UserRepo
+  participant R as BountyRepo
+  participant N as Notifier (Socket.IO)
+  actor M as Eligible mentors
+  S->>C: Fill "Post a bounty" form
+  C->>A: POST /api/bounties (JWT)
+  A->>B: createBounty(studentId, input)
+  B->>B: validate input
+  B->>U: adjustTokens(student, -reward)
+  Note right of U: atomic: tokens >= reward
+  alt insufficient balance
+    U-->>B: null
+    B-->>A: 402 Not enough tokens
+  else escrowed
+    B->>R: create({status: open, expiresAt})
+    B->>U: findMentorsBySkills(tags)
+    B->>N: toUsers(mentorIds, "bounty:new")
+    N-->>M: push bounty:new (real time)
+    B-->>A: bounty
+    A-->>C: 201 {bounty}
+  end

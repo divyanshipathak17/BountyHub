@@ -1,0 +1,30 @@
+sequenceDiagram
+  autonumber
+  actor M1 as Mentor A
+  actor M2 as Mentor B
+  participant A as Express /api
+  participant B as BountyService
+  participant R as BountyRepo
+  participant RR as RoomRepo
+  participant N as Notifier
+  actor S as Student
+  par both click Accept
+    M1->>A: POST /bounties/:id/accept
+  and
+    M2->>A: POST /bounties/:id/accept
+  end
+  A->>B: acceptBounty(A)
+  B->>R: claim(id, A, now)
+  Note over R: findOneAndUpdate({_id, status:"open", expiresAt>now})<br/>→ only ONE update can match
+  R-->>B: bounty (accepted by A)
+  B->>RR: create(room, participants, expiresAt = now + sessionMinutes)
+  B->>R: setRoom(id, roomId)
+  B->>N: toUsers([student], "bounty:accepted")
+  N-->>S: bounty:accepted {roomId}
+  B->>N: toRole("mentor", "bounty:taken")
+  A-->>M1: 200 {bounty, room}
+  A->>B: acceptBounty(B)
+  B->>R: claim(id, B, now)
+  R-->>B: null
+  B-->>A: 409 Conflict
+  A-->>M2: 409 already taken

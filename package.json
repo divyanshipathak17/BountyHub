@@ -1,0 +1,11 @@
+{
+  "name": "bountyhub",
+  "private": true,
+  "description": "Real-time micro-gig bounties for students (MERN + Socket.IO)",
+  "scripts": {
+    "install:all": "npm --prefix server install && npm --prefix client install",
+    "db:up": "docker compose up -d mongo",
+    "db:down": "docker compose down",
+    "test": "npm --prefix server test && npm --prefix client test"
+  }
+}

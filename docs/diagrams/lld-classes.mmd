@@ -1,0 +1,81 @@
+classDiagram
+  direction LR
+  class AuthService {
+    +register(input) AuthResult
+    +login(email, password) AuthResult
+    +verifyToken(token) TokenClaims
+    +me(userId) User
+  }
+  class BountyService {
+    +createBounty(studentId, input) Bounty
+    +acceptBounty(mentorId, bountyId) AcceptResult
+    +completeBounty(studentId, bountyId) Bounty
+    +cancelBounty(studentId, bountyId) Bounty
+    +expireStale() number
+    +listOpen(userId) Bounty[]
+    +listMine(userId) Bounty[]
+  }
+  class RoomService {
+    +getRoom(userId, roomId) RoomView
+    +postMessage(userId, roomId, text) Message
+    +updateNotes(userId, roomId, notes) Room
+    +isLocked(room, now) bool
+  }
+  class UserRepository {
+    <<interface>>
+    +create(data)
+    +findById(id)
+    +findByEmail(email)
+    +findManyByIds(ids)
+    +adjustTokens(id, delta) UserOrNull
+    +findMentorsBySkills(tags)
+  }
+  class BountyRepository {
+    <<interface>>
+    +create(data)
+    +findById(id)
+    +list(filter)
+    +claim(id, mentorId, now) BountyOrNull
+    +transition(id, fromStatus, patch) BountyOrNull
+    +setRoom(id, roomId)
+    +findExpiredOpen(now)
+  }
+  class RoomRepository {
+    <<interface>>
+    +create(data)
+    +findById(id)
+    +findByBountyId(id)
+    +addMessage(roomId, msg)
+    +updateNotes(roomId, notes)
+    +close(roomId)
+  }
+  class Notifier {
+    <<interface>>
+    +toUsers(ids, event, payload)
+    +toRole(role, event, payload)
+    +toRoom(roomId, event, payload)
+  }
+  class Clock {
+    <<interface>>
+    +now() Date
+  }
+  class MongoRepositories
+  class MemoryRepositories
+  class SocketNotifier
+
+  BountyService --> UserRepository
+  BountyService --> BountyRepository
+  BountyService --> RoomRepository
+  BountyService --> Notifier
+  BountyService --> Clock
+  RoomService --> RoomRepository
+  RoomService --> Notifier
+  RoomService --> Clock
+  AuthService --> UserRepository
+  MongoRepositories ..|> UserRepository
+  MongoRepositories ..|> BountyRepository
+  MongoRepositories ..|> RoomRepository
+  MemoryRepositories ..|> UserRepository
+  MemoryRepositories ..|> BountyRepository
+  MemoryRepositories ..|> RoomRepository
+  SocketNotifier ..|> Notifier

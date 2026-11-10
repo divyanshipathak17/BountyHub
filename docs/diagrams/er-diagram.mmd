@@ -1,0 +1,50 @@
+erDiagram
+  USER ||--o{ BOUNTY : "posts (postedBy)"
+  USER |o--o{ BOUNTY : "accepts (acceptedBy)"
+  BOUNTY ||--o| ROOM : "opens (bountyId, unique)"
+  USER }|--|{ ROOM : "participates (participants[2])"
+  ROOM ||--o{ MESSAGE : "embeds messages[]"
+  USER ||--o{ MESSAGE : "sends (sender)"
+
+  USER {
+    ObjectId _id PK
+    string name
+    string email UK "lowercase"
+    string passwordHash "bcrypt"
+    string role "student | mentor"
+    string[] skills "normalised, indexed"
+    number tokens "min 0"
+    date createdAt
+    date updatedAt
+  }
+  BOUNTY {
+    ObjectId _id PK
+    string title
+    string description
+    string[] tags
+    number reward
+    number sessionMinutes
+    ObjectId postedBy FK
+    ObjectId acceptedBy FK "nullable"
+    ObjectId roomId FK "nullable"
+    string status "open|accepted|completed|cancelled|expired"
+    date expiresAt "accept deadline"
+    date acceptedAt
+    date completedAt
+    date createdAt
+  }
+  ROOM {
+    ObjectId _id PK
+    ObjectId bountyId FK,UK
+    ObjectId[] participants "student + mentor"
+    string status "active | closed"
+    string notes "shared scratchpad"
+    date expiresAt "time lock"
+    date createdAt
+  }
+  MESSAGE {
+    ObjectId _id PK
+    ObjectId sender FK
+    string text
+    date sentAt
+  }

@@ -1,0 +1,21 @@
+sequenceDiagram
+  autonumber
+  actor S as Student
+  actor M as Mentor
+  participant IO as Socket.IO gateway
+  participant RS as RoomService
+  participant RR as RoomRepo
+  S->>IO: room:join {roomId}
+  IO->>RS: getRoom(student, roomId)
+  RS-->>IO: room (participant ✓, remainingSeconds)
+  IO-->>S: ack {ok, room}  + joins "room:<id>"
+  M->>IO: room:join {roomId}
+  IO-->>M: ack {ok, room}
+  M->>IO: room:message {text}
+  IO->>RS: postMessage(mentor, roomId, text)
+  RS->>RS: check participant + not locked (now < expiresAt, status active)
+  RS->>RR: addMessage()
+  RS-->>IO: emit room:message → "room:<id>"
+  IO-->>S: room:message
+  IO-->>M: room:message
+  Note over S,M: after expiresAt → 423 Locked (read-only)
